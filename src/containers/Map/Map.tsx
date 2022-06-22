@@ -1,5 +1,9 @@
-import { useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { GoogleMap } from '@react-google-maps/api';
+
+import { IApartmentItem } from '../../types/apartments';
+import { Apartments } from '../../data';
+import { MapMarker } from '../MapMarker';
 
 import './Map.scss';
 
@@ -28,8 +32,14 @@ type CenterProps = {
 
 const Map = ({ center }: CenterProps) => {
 
+	const [apartments, setApartments] = useState<IApartmentItem[]>([]);
+
 	// Save map in ref if we want to access the map
 	const mapRef = useRef<google.maps.Map | null>(null);
+
+	useEffect(() => {
+		setApartments(Apartments);
+	}, []);
 
 	const onMapLoad = useCallback((map: google.maps.Map): void => {
 		mapRef.current = map;
@@ -49,6 +59,15 @@ const Map = ({ center }: CenterProps) => {
 				onUnmount={onMapUnmount}
 				options={defaultOptions}
 			>
+				{apartments.map((apartment, index) => (
+					<MapMarker
+						key={index}
+						position={{
+							lat: apartment.lat,
+							lng: apartment.lng
+						}}
+					/>
+				))}
 			</GoogleMap>
 		</div>
 	);
