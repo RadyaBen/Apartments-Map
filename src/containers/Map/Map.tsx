@@ -1,16 +1,22 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { GoogleMap } from '@react-google-maps/api';
+import { makeStyles } from '@mui/styles';
 
 import { IApartmentItem } from '../../types/apartments';
 import { Apartments } from '../../data';
 import { MapMarker } from '../MapMarker';
 
-import './Map.scss';
+const useStyles = makeStyles({
+	container: {
+		width: '100wh',
+		height: '100vh'
+	},
+});
 
 const mapContainerStyle = {
 	width: '100%',
 	height: '100%'
-};
+}
 
 const defaultOptions = {
 	panControl: true,
@@ -32,6 +38,8 @@ type CenterProps = {
 
 const Map = ({ center }: CenterProps) => {
 
+	const classes = useStyles();
+
 	const [apartments, setApartments] = useState<IApartmentItem[]>([]);
 
 	// Save map in ref if we want to access the map
@@ -50,7 +58,7 @@ const Map = ({ center }: CenterProps) => {
 	}, []);
 
 	return (
-		<div className='container'>
+		<div className={classes.container}>
 			<GoogleMap
 				mapContainerStyle={mapContainerStyle}
 				center={center}

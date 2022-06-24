@@ -3,7 +3,8 @@ import { IApartmentItem } from '../types/apartments';
 const Apartments: IApartmentItem[] = [
 	{
 		"id": 1,
-		"image": "",
+		"image": require("../assets/images/apartment-1.png"),
+		"description": "Rent a 1-room apartment",
 		"address": "Sumska Street",
 		"lat": 49.988358,
 		"lng": 36.232845,
@@ -11,7 +12,8 @@ const Apartments: IApartmentItem[] = [
 	},
 	{
 		"id": 2,
-		"image": "",
+		"image": require("../assets/images/apartment-2.png"),
+		"description": "Rent a 2-room apartment",
 		"address": "Pohulianka Street",
 		"lat": 49.842957,
 		"lng": 24.031111,
@@ -19,7 +21,8 @@ const Apartments: IApartmentItem[] = [
 	},
 	{
 		"id": 3,
-		"image": "",
+		"image":  require("../assets/images/apartment-3.png"),
+		"description": "Rent a 3-room apartment",
 		"address": "Khreschatyk Street",
 		"lat": 50.450001,
 		"lng": 30.523333,
