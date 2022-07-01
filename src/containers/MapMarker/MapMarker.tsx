@@ -4,12 +4,14 @@ type MarkerProps = {
 	position: {
 		lat: number,
 		lng: number
-	}
+	},
+	onClick: (e: google.maps.MapMouseEvent) => void,
 };
 
-const MapMarker = ({ position }: MarkerProps) => {
+const MapMarker = ({ position, onClick }: MarkerProps) => {
+
 	return (
-		<Marker position={position} />
+		<Marker position={position} onClick={onClick} />
 	);
 };
 

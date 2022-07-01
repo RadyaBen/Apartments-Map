@@ -1,10 +1,16 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import {
+	useState,
+	useEffect,
+	useRef,
+	useCallback
+} from 'react';
 import { GoogleMap } from '@react-google-maps/api';
 import { makeStyles } from '@mui/styles';
 
 import { IApartmentItem } from '../../types/apartments';
 import { Apartments } from '../../data';
 import { MapMarker } from '../MapMarker';
+import { MapSidebar } from '../../components/MapSidebar';
 
 const useStyles = makeStyles({
 	container: {
@@ -14,7 +20,7 @@ const useStyles = makeStyles({
 });
 
 const mapContainerStyle = {
-	width: '100%',
+	width: '80%',
 	height: '100%'
 }
 
@@ -41,6 +47,7 @@ const Map = ({ center }: CenterProps) => {
 	const classes = useStyles();
 
 	const [apartments, setApartments] = useState<IApartmentItem[]>([]);
+	const [clickedMarkers, setClickedMarkers] = useState<IApartmentItem[]>([]);
 
 	// Save map in ref if we want to access the map
 	const mapRef = useRef<google.maps.Map | null>(null);
@@ -57,27 +64,40 @@ const Map = ({ center }: CenterProps) => {
 		mapRef.current = null;
 	}, []);
 
+	const handleAddToSidebar = (clickedItem: IApartmentItem): void => {
+		// Is the apartment already added in the sidebar?
+		const isItemInSidebar = clickedMarkers.find(item => item.id === clickedItem.id);
+
+		if (!isItemInSidebar) {
+			setClickedMarkers([...clickedMarkers, { ...clickedItem }]);
+		}
+	};
+
 	return (
-		<div className={classes.container}>
-			<GoogleMap
-				mapContainerStyle={mapContainerStyle}
-				center={center}
-				zoom={10}
-				onLoad={onMapLoad}
-				onUnmount={onMapUnmount}
-				options={defaultOptions}
-			>
-				{apartments.map((apartment, index) => (
-					<MapMarker
-						key={index}
-						position={{
-							lat: apartment.lat,
-							lng: apartment.lng
-						}}
-					/>
-				))}
-			</GoogleMap>
-		</div>
+		<>
+			<MapSidebar clickedMarkers={clickedMarkers} />
+			<div className={classes.container}>
+				<GoogleMap
+					mapContainerStyle={mapContainerStyle}
+					center={center}
+					zoom={10}
+					onLoad={onMapLoad}
+					onUnmount={onMapUnmount}
+					options={defaultOptions}
+				>
+					{apartments.map((apartment) => (
+						<MapMarker
+							key={apartment.id}
+							position={{
+								lat: apartment.lat,
+								lng: apartment.lng
+							}}
+							onClick={() => handleAddToSidebar(apartment)}
+						/>
+					))}
+				</GoogleMap>
+			</div>
+		</>
 	);
 };
 
