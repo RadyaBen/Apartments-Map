@@ -8,7 +8,7 @@ import { GoogleMap } from '@react-google-maps/api';
 import { makeStyles } from '@mui/styles';
 
 import { IApartmentItem } from '../../types/apartments';
-import { Apartments } from '../../data';
+import { useAxiosFetch } from '../../hooks/useFetch.hook';
 import { MapMarker } from '../MapMarker';
 import { MapSidebar } from '../../components/MapSidebar';
 
@@ -48,13 +48,27 @@ const Map = ({ center }: CenterProps) => {
 
 	const [apartments, setApartments] = useState<IApartmentItem[]>([]);
 	const [clickedMarkers, setClickedMarkers] = useState<IApartmentItem[]>([]);
+	const [response, error] = useAxiosFetch({
+		method: "GET",
+		url: "/apartments"
+	});
 
 	// Save map in ref if we want to access the map
 	const mapRef = useRef<google.maps.Map | null>(null);
 
 	useEffect(() => {
-		setApartments(Apartments);
-	}, []);
+		if (response) {
+			setApartments(response);
+		} else {
+			setApartments([]);
+		}
+	}, [response]);
+
+	useEffect(() => {
+		if (error) {
+			console.log(error);
+		}
+	}, [error]);
 
 	const onMapLoad = useCallback((map: google.maps.Map): void => {
 		mapRef.current = map;

@@ -1,4 +1,3 @@
-import React from 'react';
 import { useJsApiLoader } from '@react-google-maps/api';
 
 import { Map } from '../../containers/Map';
