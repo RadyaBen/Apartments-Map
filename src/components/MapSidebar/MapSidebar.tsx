@@ -24,7 +24,7 @@ const useStyles = makeStyles({
 		maxWidth: 260,
 		height: 320,
 		margin: 8,
-		borderRadius: 30
+		borderRadius: 10
 	},
 	image: {
 		minWidth: 250,
