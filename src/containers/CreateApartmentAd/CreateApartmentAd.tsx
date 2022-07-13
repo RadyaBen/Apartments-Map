@@ -3,6 +3,8 @@ import {
 	ChangeEvent,
 	FormEvent
 } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+import { useNavigate } from 'react-router-dom';
 import {
 	Box,
 	Grid,
@@ -12,6 +14,8 @@ import {
 	Button
 } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+
+import { useAxiosFetch } from '../../hooks/useFetch.hook';
 
 const useStyles = makeStyles({
 	container: {
@@ -37,7 +41,7 @@ const useStyles = makeStyles({
 			background: '#7571f9',
 			'&:hover': {
 				backgroundColor: '#3c52b2'
-			}  
+			}
 		}
 	},
 	paper: {
@@ -53,15 +57,17 @@ type IFormValuesState = {
 	rent: string
 };
 
-const CreateNewAd = () => {
+const CreateApartmentAd = () => {
 
 	const classes = useStyles();
+	const navigate = useNavigate();
 	const [formValues, setFormValues] = useState<IFormValuesState>({
 		image: '',
 		description: '',
 		adress: '',
 		rent: ''
 	});
+	const [fetchData] = useAxiosFetch();
 
 	const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
@@ -71,21 +77,45 @@ const CreateNewAd = () => {
 		});
 	};
 
-	const handleFormSubmit = (e: FormEvent) => {
+	const handleFormSubmit = async (e: FormEvent) => {
 		e.preventDefault();
 
-		if (formValues) {
-			setFormValues({
-				image: '',
-				description: '',
-				adress: '',
-				rent: ''
-			});
-		}
+		let lat = Number((Math.random() * (45 - 35) + 45).toFixed(6));
+		let lng = Number((Math.random() * (45 - 35) + 45).toFixed(6));
+
+		fetchData && fetchData({
+			method: 'POST',
+			url: '/apartments',
+			headers: {
+				'Content-Type': 'application/json',
+				'accept': 'application/json'
+			},
+			data: {
+				id: uuidv4(),
+				image: formValues.image,
+				description: formValues.description,
+				adress: formValues.adress,
+				lat: lat,
+				lng: lng,
+				rent: formValues.rent
+			}
+		});
+
+		setFormValues({
+			image: '',
+			description: '',
+			adress: '',
+			rent: ''
+		});
+
+		redirectToMapPage();
+	};
+
+	const redirectToMapPage = () => {
+		navigate('/');
 	};
 
 	return (
-
 		<div className={classes.container}>
 			<Box
 				className={classes.root}
@@ -113,7 +143,7 @@ const CreateNewAd = () => {
 						<TextField
 							name='image'
 							label='Image'
-							placeholder='Enter an apartment image'
+							placeholder='Enter an apartment image link'
 							fullWidth
 							value={formValues.image}
 							onChange={handleInputChange}
@@ -160,4 +190,4 @@ const CreateNewAd = () => {
 	);
 };
 
-export { CreateNewAd }
+export { CreateApartmentAd }
