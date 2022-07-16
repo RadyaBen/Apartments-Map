@@ -1,9 +1,9 @@
 export type IApartmentItem = {
-	id: number,
+	id: string,
 	image: string,
 	description: string,
 	address: string,
 	lat: number,
 	lng: number
-	rent: number,
+	rent: string,
 };

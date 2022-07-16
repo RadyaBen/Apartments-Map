@@ -22,7 +22,7 @@ const useStyles = makeStyles({
 const mapContainerStyle = {
 	width: '80%',
 	height: '100%'
-}
+};
 
 const defaultOptions = {
 	panControl: true,
@@ -48,7 +48,7 @@ const Map = ({ center }: CenterProps) => {
 
 	const [apartments, setApartments] = useState<IApartmentItem[]>([]);
 	const [clickedMarkers, setClickedMarkers] = useState<IApartmentItem[]>([]);
-	const [response, error, loading] = useAxiosFetch({
+	const { response, error, loading } = useAxiosFetch({
 		method: 'GET',
 		url: '/apartments',
 		headers: {
