@@ -22,7 +22,7 @@ const useStyles = makeStyles({
 const mapContainerStyle = {
 	width: '80%',
 	height: '100%'
-}
+};
 
 const defaultOptions = {
 	panControl: true,
@@ -48,19 +48,21 @@ const Map = ({ center }: CenterProps) => {
 
 	const [apartments, setApartments] = useState<IApartmentItem[]>([]);
 	const [clickedMarkers, setClickedMarkers] = useState<IApartmentItem[]>([]);
-	const [response, error] = useAxiosFetch({
-		method: "GET",
-		url: "/apartments"
+	const { response, error, loading } = useAxiosFetch({
+		method: 'GET',
+		url: '/apartments',
+		headers: {
+			'Content-Type': 'application/json',
+			'accept': 'application/json'
+		}
 	});
 
 	// Save map in ref if we want to access the map
 	const mapRef = useRef<google.maps.Map | null>(null);
 
 	useEffect(() => {
-		if (response) {
+		if (response !== null) {
 			setApartments(response);
-		} else {
-			setApartments([]);
 		}
 	}, [response]);
 
@@ -69,6 +71,12 @@ const Map = ({ center }: CenterProps) => {
 			console.log(error);
 		}
 	}, [error]);
+
+	useEffect(() => {
+		if (loading) {
+			console.log('Loading data...');
+		}
+	}, [loading]);
 
 	const onMapLoad = useCallback((map: google.maps.Map): void => {
 		mapRef.current = map;
@@ -99,7 +107,7 @@ const Map = ({ center }: CenterProps) => {
 					onUnmount={onMapUnmount}
 					options={defaultOptions}
 				>
-					{apartments.map((apartment) => (
+					{apartments && apartments.map((apartment) => (
 						<MapMarker
 							key={apartment.id}
 							position={{

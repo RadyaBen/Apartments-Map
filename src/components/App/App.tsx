@@ -1,11 +1,11 @@
-import { 
-	BrowserRouter as Router, 
-	Routes, 
+import {
+	BrowserRouter as Router,
+	Routes,
 	Route
 } from 'react-router-dom';
 
 import { MainPage } from '../../pages/MainPage';
-import { CreateNewAd } from '../CreateNewAd';
+import { CreateApartmentAd } from '../../containers/CreateApartmentAd';
 
 const App = () => {
 
@@ -14,10 +14,9 @@ const App = () => {
 			<Router>
 				<Routes>
 					<Route path='/' element={<MainPage />} />
-					<Route path='/createAd' element={<CreateNewAd />} />
+					<Route path='/createAd' element={<CreateApartmentAd />} />
 				</Routes>
 			</Router>
-			
 		</>
 	);
 };
