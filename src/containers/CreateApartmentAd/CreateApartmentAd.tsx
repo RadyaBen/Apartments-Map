@@ -10,44 +10,11 @@ import {
 	Typography,
 	Button
 } from '@mui/material';
-import { makeStyles } from '@mui/styles';
 
 import { useAxiosFetch } from '../../hooks/useFetch.hook';
 import { IApartmentItem } from '../../types/apartments';
 import { FormInput, formSchema } from '../../components/FormInput';
-
-const useStyles = makeStyles({
-	container: {
-		display: 'flex',
-		alignItems: 'center',
-		justifyContent: 'center',
-		minHeight: '100vh',
-		background: '#F3F3F9'
-	},
-	root: {
-		width: 500,
-		'& .MuiTextField-root': {
-			marginTop: 20,
-			margintBottom: 20
-		},
-		'& .MuiTypography-root': {
-			margin: 10
-		},
-		'& .MuiButton-root': {
-			marginTop: 48,
-			fontSize: '1.2em',
-			textTransform: 'capitalize',
-			background: '#7571f9',
-			'&:hover': {
-				backgroundColor: '#3c52b2'
-			}
-		}
-	},
-	paper: {
-		padding: '40px',
-		height: 440
-	}
-});
+import { useStyles } from './styles';
 
 const CreateApartmentAd = () => {
 
@@ -67,7 +34,7 @@ const CreateApartmentAd = () => {
 
 	useEffect(() => {
 		if (isSubmitSuccessful) {
-			reset();
+			reset(); // Reset form with user data
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isSubmitSuccessful]);
@@ -97,11 +64,11 @@ const CreateApartmentAd = () => {
 				rent: formValues.rent
 			}
 		});
-
 		redirectToMapPage();
 	};
 
 	const redirectToMapPage = () => {
+		reset();
 		navigate('/');
 	};
 
@@ -159,13 +126,20 @@ const CreateApartmentAd = () => {
 								fullWidth
 								variant='standard'
 							/>
-							<Button
-								variant='contained'
-								fullWidth
-								type='submit'
-							>
-								Create
-							</Button>
+							<Box className={classes.buttonBox}>
+								<Button
+									variant='outlined'
+									onClick={() => redirectToMapPage()}
+								>
+									Cancel
+								</Button>
+								<Button
+									variant='contained'
+									type='submit'
+								>
+									Create
+								</Button>
+							</Box>
 						</Grid>
 					</Paper>
 				</Box>
@@ -174,4 +148,4 @@ const CreateApartmentAd = () => {
 	);
 };
 
-export { CreateApartmentAd }
+export { CreateApartmentAd };
