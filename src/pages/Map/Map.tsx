@@ -5,35 +5,14 @@ import {
 	useCallback
 } from 'react';
 import { GoogleMap } from '@react-google-maps/api';
-import { makeStyles } from '@mui/styles';
+import { CssBaseline, Grid } from '@mui/material';
 
 import { IApartmentItem } from '../../types/apartments';
 import { useAxiosFetch } from '../../hooks/useFetch.hook';
-import { MapMarker } from '../MapMarker';
-import { MapSidebar } from '../../components/MapSidebar';
-
-const useStyles = makeStyles({
-	container: {
-		width: '100wh',
-		height: '100vh'
-	},
-});
-
-const mapContainerStyle = {
-	width: '80%',
-	height: '100%'
-};
-
-const defaultOptions = {
-	panControl: true,
-	zoomControl: true,
-	mapTypeControl: false,
-	scaleControl: false,
-	streetViewControl: false,
-	rolateControl: false,
-	keyboardShortcuts: false,
-	fullscreenControl: false
-};
+import { MapMarker } from '../../components/ui/MapMarker';
+import { MapSidebar } from '../../components/ui/MapSidebar';
+import { defaultOptions } from './defaultOptions';
+import { useStyles, mapContainerStyle } from './styles';
 
 type CenterProps = {
 	center: {
@@ -43,8 +22,6 @@ type CenterProps = {
 };
 
 const Map = ({ center }: CenterProps) => {
-
-	const classes = useStyles();
 
 	const [apartments, setApartments] = useState<IApartmentItem[]>([]);
 	const [clickedMarkers, setClickedMarkers] = useState<IApartmentItem[]>([]);
@@ -56,6 +33,7 @@ const Map = ({ center }: CenterProps) => {
 			'accept': 'application/json'
 		}
 	});
+	const classes = useStyles();
 
 	// Save map in ref if we want to access the map
 	const mapRef = useRef<google.maps.Map | null>(null);
@@ -97,27 +75,34 @@ const Map = ({ center }: CenterProps) => {
 
 	return (
 		<>
-			<MapSidebar clickedMarkers={clickedMarkers} />
+			<CssBaseline />
 			<div className={classes.container}>
-				<GoogleMap
-					mapContainerStyle={mapContainerStyle}
-					center={center}
-					zoom={10}
-					onLoad={onMapLoad}
-					onUnmount={onMapUnmount}
-					options={defaultOptions}
-				>
-					{apartments && apartments.map((apartment) => (
-						<MapMarker
-							key={apartment.id}
-							position={{
-								lat: apartment.lat,
-								lng: apartment.lng
-							}}
-							onClick={() => handleAddToSidebar(apartment)}
-						/>
-					))}
-				</GoogleMap>
+				<Grid container>
+					<Grid item xs={8} md={9.5} sm={8}>
+						<GoogleMap
+							mapContainerStyle={mapContainerStyle}
+							center={center}
+							zoom={10}
+							onLoad={onMapLoad}
+							onUnmount={onMapUnmount}
+							options={defaultOptions}
+						>
+							{apartments.map((apartment) => (
+								<MapMarker
+									key={apartment.id}
+									position={{
+										lat: apartment.lat,
+										lng: apartment.lng
+									}}
+									onClick={() => handleAddToSidebar(apartment)}
+								/>
+							))}
+						</GoogleMap>
+					</Grid>
+					<Grid item xs={4} md={2.5} sm={4} className={classes.sidebar}>
+						<MapSidebar clickedMarkers={clickedMarkers} />
+					</Grid>
+				</Grid>
 			</div>
 		</>
 	);

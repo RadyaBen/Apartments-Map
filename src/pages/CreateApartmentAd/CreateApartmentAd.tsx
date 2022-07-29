@@ -13,7 +13,7 @@ import {
 
 import { useAxiosFetch } from '../../hooks/useFetch.hook';
 import { IApartmentItem } from '../../types/apartments';
-import { FormInput, formSchema } from '../../components/FormInput';
+import { FormInput, formSchema } from '../../components/form/FormInput';
 import { useStyles } from './styles';
 
 const CreateApartmentAd = () => {
