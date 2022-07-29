@@ -4,8 +4,8 @@ import {
 	Route
 } from 'react-router-dom';
 
-import { MainPage } from '../../pages/MainPage';
-import { CreateApartmentAd } from '../../containers/CreateApartmentAd';
+import { MainPage } from '../MainPage';
+import { CreateApartmentAd } from '../CreateApartmentAd';
 
 const App = () => {
 

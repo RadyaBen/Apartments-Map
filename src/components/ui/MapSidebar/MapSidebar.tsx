@@ -9,7 +9,7 @@ import {
 } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 
-import { IApartmentItem } from '../../types/apartments';
+import { IApartmentItem } from '../../../types/apartments';
 
 const drawerWidth = 280;
 
