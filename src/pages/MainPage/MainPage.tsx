@@ -2,6 +2,7 @@ import { useJsApiLoader } from '@react-google-maps/api';
 
 import { Map } from '../Map';
 import { MapHeader } from '../../components/ui/MapHeader';
+import { Spinner } from '../../components/ui/Spinner';
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
@@ -20,7 +21,7 @@ const MainPage = () => {
 	return (
 		<>
 			<MapHeader />
-			{isLoaded ? <Map center={defaultCenter} /> : <h2>Loading...</h2>}
+			{isLoaded ? <Map center={defaultCenter} /> : <Spinner/> }
 		</>
 	);
 };
