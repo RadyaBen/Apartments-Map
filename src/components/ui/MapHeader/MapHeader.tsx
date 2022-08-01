@@ -27,4 +27,4 @@ const MapHeader = () => {
 	);
 };
 
-export { MapHeader }
+export { MapHeader };

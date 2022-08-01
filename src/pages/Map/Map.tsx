@@ -108,4 +108,4 @@ const Map = ({ center }: CenterProps) => {
 	);
 };
 
-export { Map }
+export { Map };
