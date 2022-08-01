@@ -21,7 +21,7 @@ const MainPage = () => {
 	return (
 		<>
 			<MapHeader />
-			{isLoaded ? <Map center={defaultCenter} /> : <Spinner/> }
+			{isLoaded ? <Map center={defaultCenter} /> : <Spinner />}
 		</>
 	);
 };

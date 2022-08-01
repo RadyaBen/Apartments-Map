@@ -6,6 +6,7 @@ import {
 
 import { MainPage } from '../MainPage';
 import { CreateApartmentAd } from '../CreateApartmentAd';
+import { NotFoundPage } from '../NotFoundPage';
 
 const App = () => {
 
@@ -15,6 +16,7 @@ const App = () => {
 				<Routes>
 					<Route path='/' element={<MainPage />} />
 					<Route path='/createAd' element={<CreateApartmentAd />} />
+					<Route path='*' element={<NotFoundPage />} />
 				</Routes>
 			</Router>
 		</>

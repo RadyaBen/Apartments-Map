@@ -25,4 +25,4 @@ const MapMarker = ({ position, onClick }: MarkerProps) => {
 	);
 };
 
-export { MapMarker }
+export { MapMarker };
