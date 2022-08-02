@@ -37,23 +37,39 @@ const MapSidebar = ({ clickedMarkers }: ClickedMarkersProps) => {
 				<Grid container spacing={1} style={{ height: 'calc(100vh - 64px)', overflowY: 'auto' }}>
 					{clickedMarkers && clickedMarkers.map((apartment) => (
 						<Grid item xs key={apartment.id} >
-							<Card elevation={3} className={classes.mapCard}>
-								<CardMedia
-									className={classes.image}
-									component='img'
-									alt={apartment.description}
-									image={apartment.image}
-									title='Apartment Image'
-								/>
-								<CardContent>
-									<Typography variant='body1' component='h2'>
-										<Box fontWeight={600}>{apartment.description}</Box>
-									</Typography>
-									<Typography variant='body2' component='h2'>
-										{apartment.address}
-									</Typography>
-								</CardContent>
-							</Card>
+							<Card elevation={3} className={classes.card}>
+                                <CardMedia
+                                    className={classes.image}
+                                    component='img'
+                                    alt={apartment.description}
+                                    image={apartment.image}
+                                    title='Apartment Image'
+                                />
+                                <CardContent>
+                                    <Typography
+                                        className={classes.overlay}
+                                        variant='body2'
+                                        component='h2'
+                                        sx={{
+                                            fontSize: {
+                                                xs: 10,
+                                                sm: 20,
+                                                md: 16,
+                                                lg: 15
+                                            },
+                                            padding: 0.5
+                                        }}
+                                    >
+                                        {apartment.rent} {'UAH'} / {'day'}
+                                    </Typography>
+                                    <Typography variant='body1' component='h2'>
+                                        <Box fontWeight={600}>{apartment.description}</Box>
+                                    </Typography>
+                                    <Typography variant='body2' component='h2'>
+                                        {apartment.address}
+                                    </Typography>
+                                </CardContent>
+                            </Card>
 						</Grid>
 					))}
 				</Grid>
