@@ -1,3 +1,5 @@
+import { defaultTheme } from './mapTheme';
+
 const defaultOptions = {
 	panControl: true,
 	zoomControl: true,
@@ -6,7 +8,8 @@ const defaultOptions = {
 	streetViewControl: false,
 	rolateControl: false,
 	keyboardShortcuts: false,
-	fullscreenControl: false
+	fullscreenControl: false,
+	styles: defaultTheme
 };
 
 export { defaultOptions };
