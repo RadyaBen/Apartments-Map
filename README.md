@@ -1,22 +1,22 @@
-<div align='center'>
+<div align="center">
   <br>
   <h1>Apartments Map</h1>
 </div>
 
 <!-- PROJECT SHIELDS -->
-<div align='center'>
+<div align="center">
 
-  <a href="">![GitHub last commit](https://img.shields.io/github/last-commit/RadyaBen/Apartments-Map?style=plastic)</a>
-  <a href="">![GitHub repo size](https://img.shields.io/github/repo-size/RadyaBen/Apartments-Map?style=plastic)</a>
-  <a href="">![GitHub language count](https://img.shields.io/github/languages/count/RadyaBen/Apartments-Map?style=plastic)</a>
-  <a href="">![GitHub top language](https://img.shields.io/github/languages/top/RadyaBen/Apartments-Map?style=plastic)</a>
+   ![GitHub last commit](https://img.shields.io/github/last-commit/RadyaBen/Apartments-Map?style=plastic)
+   ![GitHub repo size](https://img.shields.io/github/repo-size/RadyaBen/Apartments-Map?style=plastic)
+   ![GitHub language count](https://img.shields.io/github/languages/count/RadyaBen/Apartments-Map?style=plastic)
+   ![GitHub top language](https://img.shields.io/github/languages/top/RadyaBen/Apartments-Map?style=plastic)
 
 </div>
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-<img src='src/assets/image/app-screenshot.png' max-widt='100%' height='auto' alt='Apartments Map' title='Apartments Map'>
+<img src="src/assets/image/app-screenshot.png" max-width="100%" height="auto" alt="Apartments Map" title="Apartments Map">
 
 Apartments Map is a website whose main goal is to display apartment rental ads on the map.
 A user hat the ability to add an ad. And after it has been added, a point appears on the map.
